@@ -5,7 +5,6 @@ import SearchBooks from './components/SearchBooks'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
-
 class BooksApp extends React.Component {
   render() {
     return (
@@ -14,7 +13,7 @@ class BooksApp extends React.Component {
           <SearchBooks/>
         )}/>
         <Route exact path='/' render={() => (
-            <ListBooksContent/>
+          <ListBooksContent/>
         )}/>
       </div>
     )
