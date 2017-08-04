@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Shelf from './Shelf'
 
-// hoi
-
 class ListBooksContent extends Component {
   state = {
     currentlyReadingShelf: [
