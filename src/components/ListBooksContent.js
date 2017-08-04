@@ -5,7 +5,7 @@ import Shelf from './Shelf'
 
 class ListBooksContent extends Component {
   state = {
-    bookshelfs: [ {
+    bookShelfs: [ {
       currentlyReadingShelf: [
         { cover: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")',
           title: "To Kill a Mockingbird",
@@ -54,7 +54,7 @@ class ListBooksContent extends Component {
 
           <div className="bookshelf">
             <h2 className="bookshelf-title">Want to Read</h2>
-            <Shelf books ={this.state.bookShelfs[1].wantToReadShelf}/>
+            <Shelf books={this.state.bookShelfs[1].wantToReadShelf}/>
           </div>
 
           <div className="bookshelf">
