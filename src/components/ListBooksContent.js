@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Shelf from './Shelf'
 
-
 class ListBooksContent extends Component {
   state = {
-    bookShelfs: [ {
+    bookshelfs: [ {
       currentlyReadingShelf: [
         { cover: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")',
           title: "To Kill a Mockingbird",
@@ -46,21 +45,9 @@ class ListBooksContent extends Component {
         </div>
 
         <div className="list-books-content">
-
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Currently Reading</h2>
-            <Shelf books={this.state.bookShelfs[0].currentlyReadingShelf}/>
-          </div>
-
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Want to Read</h2>
-            <Shelf books={this.state.bookShelfs[1].wantToReadShelf}/>
-          </div>
-
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Read</h2>
-            <Shelf books={this.state.bookShelfs[2].readShelf}/>
-          </div>
+          <Shelf shelfTitle="Currently Reading"  books={this.state.bookshelfs[0].currentlyReadingShelf}/>
+          <Shelf shelfTitle="Want to Read" books={this.state.bookshelfs[1].wantToReadShelf}/>
+          <Shelf shelfTitle="Read" books={this.state.bookshelfs[2].readShelf}/>
 
           <div className="open-search">
             <Link
