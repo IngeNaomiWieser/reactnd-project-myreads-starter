@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import Shelf from './Shelf'
+import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends Component {
 
   state = {
-    query: ''
+    query: '',
+    searchedBooks: []
   }
 
+  // this is for putting the search request from the input into the state (first line of the function)
+  // and then for actually searching for the books in the API when someone changes the query by typing
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query.trim() });
+    BooksAPI.search(this.state.query, 20).then((books) => {
+      this.setState({searchedBooks: books});
+    })
   }
 
   render() {
@@ -29,7 +37,12 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            <Shelf
+              // shelfTitle="Books that match your search"
+              books={this.state.searchedBooks}
+            />
+          </ol>
         </div>
       </div>
     )
