@@ -4,10 +4,14 @@ import Shelf from './Shelf'
 import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends Component {
-
-  state = {
-    query: '',
-    searchedBooks: []
+  // it seems to work without the constructor, but do it like this:
+  // note: even though there are no props, put props in there. 
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '',
+      searchedBooks: []
+    };
   }
 
   // this is for putting the search request from the input into the state (first line of the function)
