@@ -19,13 +19,14 @@ class SearchBooks extends Component {
   updateQuery = (query) => {
     if (query !== '') {
       this.setState({query: query.trim()});
-      this.searchBooks(query);
+      this.searchBooks(query); // if there is a query, we run the searchBooks function
     } else {
+      // if there is no query, do this:
        this.setState({query: query.trim(), searchedBooks: [], titleSearchShelf: ''});
      }
   }
 
-  // here we are updating the state of the searchedbooks when the query is not an empty string
+  // here we are updating the state of the searchedbooks (only when the query is not an empty string)
   searchBooks = (query) => {
     BooksAPI.search(query, 20).then((books) => {
       // if the object books has the key 'error', don't update the state.
