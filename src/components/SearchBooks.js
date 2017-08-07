@@ -5,21 +5,33 @@ import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends Component {
   // it seems to work without the constructor, but do it like this:
-  // note: even though there are no props, put props in there. 
+  // note: even though there are no props, put props in there.
   constructor(props) {
     super(props);
     this.state = {
       query: '',
-      searchedBooks: []
+      searchedBooks: [],
+      titleSearchShelf: ''
     };
   }
 
-  // this is for putting the search request from the input into the state (first line of the function)
-  // and then for actually searching for the books in the API when someone changes the query by typing
+  // putting the search request from the input into the state query
   updateQuery = (query) => {
-    this.setState({ query: query.trim() });
-    BooksAPI.search(this.state.query, 20).then((books) => {
-      this.setState({searchedBooks: books});
+    if (query !== '') {
+      this.setState({query: query.trim()});
+      this.searchBooks(query);
+    } else {
+       this.setState({query: query.trim(), searchedBooks: [], titleSearchShelf: ''});
+     }
+  }
+
+  // here we are updating the state of the searchedbooks when the query is not an empty string
+  searchBooks = (query) => {
+    BooksAPI.search(query, 20).then((books) => {
+      // if the object books has the key 'error', don't update the state.
+      if (!books.hasOwnProperty('error')) {
+        this.setState({ searchedBooks: books, titleSearchShelf: "Books that match your search"});
+      }
     })
   }
 
@@ -43,7 +55,7 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             <Shelf
-              // shelfTitle="Books that match your search"
+              shelfTitle={this.state.titleSearchShelf}
               books={this.state.searchedBooks}
             />
           </ol>
