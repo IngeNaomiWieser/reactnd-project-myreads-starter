@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import * as BooksAPI from '../BooksAPI'
 
 class Shelf extends Component {
-
-  updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf);
-  }
 
   render() {
     return (
@@ -19,7 +14,9 @@ class Shelf extends Component {
                 <div className="book-top">
                   <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail}`}}></div>
                   <div className="book-shelf-changer">
-                    <select value={book.shelf || 'none'} onChange={(event) => this.updateShelf(book, event.target.value)}>
+                    <select value={book.shelf || 'none'}
+                            onChange={(event) =>  this.props.onUpdateShelf(book, event.target.value)}
+                            >
                       <option value="none" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
@@ -39,43 +36,5 @@ class Shelf extends Component {
     )
   }
 }
-
-// Below you see a stateless functional component, instead of the class above (we can do this because we only have 'render' as a method in the class, so no state):
-// A difference to remember is that you do props.books instead of this.props.books
-// function Shelf(props) {
-//   return (
-//     <div className="bookshelf-books">
-//       <ol className="books-grid">
-//         {props.books.map(book => (
-//           <li key={book.title}>
-//           <div className="book">
-//             <div className="book-top">
-//               <div className="book-cover" style= {{width: 128, height: 193, backgroundImage: book.cover}}></div>
-//               <div className="book-shelf-changer">
-//                 <select>
-//                   <option value="none" disabled>Move to...</option>
-//                   <option value="currentlyReading">Currently Reading</option>
-//                   <option value="wantToRead">Want to Read</option>
-//                   <option value="read">Read</option>
-//                   <option value="none">None</option>
-//                 </select>
-//               </div>
-//             </div>
-//             <div className="book-title">{book.title}</div>
-//             <div className="book-authors">{book.authors}</div>
-//           </div>
-//           </li>
-//         ))}
-//       </ol>
-//     </div>
-//   )
-// }
-
-// Or an example with the arrow function (no return statement):
-// const Email = (props) => (
-//   <div>
-//     {props.text}
-//   </div>
-// )
 
 export default Shelf

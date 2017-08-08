@@ -11,7 +11,7 @@ class SearchBooks extends Component {
     this.state = {
       query: '',
       searchedBooks: [],
-      titleSearchShelf: ''
+      textSearchShelf: ''
     };
   }
 
@@ -22,7 +22,7 @@ class SearchBooks extends Component {
       this.searchBooks(query); // if there is a query, we run the searchBooks function
     } else {
       // if there is no query, do this:
-       this.setState({query: query.trim(), searchedBooks: [], titleSearchShelf: ''});
+       this.setState({query: query.trim(), searchedBooks: [], textSearchShelf: ''});
      }
   }
 
@@ -31,7 +31,7 @@ class SearchBooks extends Component {
     BooksAPI.search(query, 20).then((books) => {
       // if the object books has the key 'error', don't update the state.
       if (!books.hasOwnProperty('error')) {
-        this.setState({ searchedBooks: books, titleSearchShelf: "Books that match your search"});
+        this.setState({ searchedBooks: books, textSearchShelf: "Books that match your search"});
       }
     })
   }
@@ -56,7 +56,8 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             <Shelf
-              shelfTitle={this.state.titleSearchShelf}
+              onUpdateShelf={this.props.onUpdateShelf}
+              shelfTitle={this.state.textSearchShelf}
               books={this.state.searchedBooks}
             />
           </ol>
