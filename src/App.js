@@ -6,10 +6,13 @@ import './App.css'
 import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
-  state = {
-    currentlyReadingShelf: [],
-    wantToReadShelf: [],
-    readShelf: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentlyReadingShelf: [],
+      wantToReadShelf: [],
+      readShelf: []
+    };
   }
 
   getBooks = () => {
@@ -34,10 +37,12 @@ class BooksApp extends React.Component {
     })
   }
 
+  // showing the books on the page when page renders (for the first time)
   componentDidMount() {
     this.getBooks();
   }
 
+  // this allows moving the books between shelfs, see the BooksAPI.js for more info on update(book, shelf)
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {this.getBooks()})
   }
