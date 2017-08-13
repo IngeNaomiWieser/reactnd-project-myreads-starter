@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Shelf extends Component {
 
-  render() {    // this can be turned into a functional component. 
+  render() {   
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.shelfTitle}</h2>

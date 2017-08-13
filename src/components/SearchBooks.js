@@ -4,12 +4,10 @@ import Shelf from './Shelf'
 import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends Component {
-  // it seems to work without the constructor, but probably better to do it like this:
-  // note: even though there are no props here, put the parameter props in there.
   constructor(props) {
     super(props);
     this.state = {
-      query: '',    // zoekterm
+      query: '',    
       searchedBooks: [],
       textSearchShelf: ''
     };
@@ -20,7 +18,7 @@ class SearchBooks extends Component {
   // putting the search request from the input into the state query
   updateQuery = (query) => {
     if (query !== '') {
-      this.setState({query: query.trim()}); // trim removes spaces etc
+      this.setState({query: query.trim()});
       this.searchBooks(query); // if there is a query, run the searchBooks function
     } else {
       // if there is no query, do this:
@@ -59,7 +57,7 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             <Shelf
-              onUpdateShelf={this.props.onUpdateShelf} 
+              onUpdateShelf={this.props.onUpdateShelf}
               shelfTitle={this.state.textSearchShelf}
               books={this.state.searchedBooks}
             />
