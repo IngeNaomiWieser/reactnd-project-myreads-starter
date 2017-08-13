@@ -7,7 +7,7 @@ class SearchBooks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',    
+      query: '',
       searchedBooks: [],
       textSearchShelf: ''
     };
@@ -26,13 +26,26 @@ class SearchBooks extends Component {
      }
   }
 
+  // the search API request does not give back a shelf key for the book object.
+  // So when we search for a book, we need to check if any of the search results already exists in the list of books.
+  // if the one of the books from the search result exists in the list of books, we have to change it to the appropriate shelf type.
+
   // here we are updating the state of the searchedbooks (only when the query is not an empty string)
   // 'query' in the parameter is the new 'query'-state
   searchBooks = (query) => {
     BooksAPI.search(query, 20).then((books) => {       // books is the parameter
-      // if the object books does not the key 'error', only then: update the state.
+      // if the query is legit, you get back an array of objects.
+      // if not legit, you get an object with an error key.
+      // So... if the object books does not have the key 'error', only then: update the state.
       if (!books.hasOwnProperty('error')) {
-        this.setState({ searchedBooks: books, textSearchShelf: "Books that match your search"});
+        //need to update books to include shelf information
+        this.props.myBooks.forEach(myBook => {
+          // here we replace the book from the search result that is also in our book list with our book, because our book has the shelf key and the book from the search result does not.
+          books = books.filter(b => b.id !== myBook.id).concat([ myBook ])
+        })
+        this.setState({
+          searchedBooks: books,
+          textSearchShelf: "Books that match your search"});
       }
     })
   }
