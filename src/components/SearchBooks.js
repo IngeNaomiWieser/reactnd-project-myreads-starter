@@ -4,7 +4,7 @@ import Shelf from './Shelf'
 import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends Component {
-  // it seems to work without the constructor, but probably better to do it like this:
+  // it seems to work without the constructor, but better to do it like this:
   // note: even though there are no props here, put the parameter props in there.
   constructor(props) {
     super(props);
@@ -59,7 +59,7 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             <Shelf
-              onUpdateShelf={this.props.onUpdateShelf} 
+              onUpdateShelf={this.props.onUpdateShelf}
               shelfTitle={this.state.textSearchShelf}
               books={this.state.searchedBooks}
             />

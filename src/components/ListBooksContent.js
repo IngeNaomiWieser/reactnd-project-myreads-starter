@@ -4,8 +4,6 @@ import Shelf from './Shelf'
 
 class ListBooksContent extends Component {
 
-  // should I make this a functional compponent?
-
   render() {
     return (
       <div className="list-books">
